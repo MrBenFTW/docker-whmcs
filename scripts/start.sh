@@ -13,7 +13,6 @@ fi
 #echo date.timezone = $PHPTZ >>/etc/php.ini
 
 # Tweak nginx to match the workers to cpu's
-
 procs=$(cat /proc/cpuinfo |grep processor | wc -l)
 sed -i -e "s/worker_processes 5/worker_processes $procs/" /etc/nginx/nginx.conf
 
@@ -23,14 +22,23 @@ if [ ! -e /.first-run-complete ]; then
   mkdir /usr/local/ioncube
   cp /tmp/ioncube/ioncube_loader_lin_5.6.so /opt/remi/php56/root/usr/lib64/php/modules
 
+  #extract whmcs into place
   rm -f /usr/share/nginx/html/*.html
   unzip /whmcs.zip -d /usr/share/nginx/html && mv /usr/share/nginx/html/whmcs/* /usr/share/nginx/html && rmdir /usr/share/nginx/html/whmcs
-  touch /usr/share/nginx/html/configuration.php && chown nginx:nginx /usr/share/nginx/html/configuration.php && chmod 0777 /usr/share/nginx/html/configuration.php
   rm -f /whmcs.zip
 
+  #extract xero-addon into place
+  unzip /xero.zip -d /usr/share/nginx/html
+  rm -f /xero.zip
+
+  unzip /ciptex.zip -d /usr/share/nginx/html
+  rm -f /ciptex.zip
+
   #Remove install
-  rm -rf /usr/share/nginx/html/install
-  mv /tmp/configuration.php /usr/share/nginx/html/configuration.php
+  rm -rf /usr/share/nginx/html/install directory
+
+  #sort permissions on configuration.php file
+  chown nginx:nginx /usr/share/nginx/html/configuration.php && chmod 0777 /usr/share/nginx/html/configuration.php
 
   echo "Do not remove this file." > /.first-run-complete
 fi
@@ -40,6 +48,8 @@ chown -Rf nginx:nginx /usr/share/nginx/html/
 
 # Start the first process
 /usr/sbin/php-fpm -c /etc/php-fpm.conf && /usr/sbin/nginx
+
+
 #status=$?
 #if [ $status -ne 0 ]; then
 #  echo "Failed to start php-fpm: $status"

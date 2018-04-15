@@ -35,23 +35,9 @@ ln -s /etc/opt/remi/php56/php-fpm.conf /etc/php-fpm.conf && \
 ln -s /etc/opt/remi/php56/php-fpm.d /etc/php-fpm.d && \
 ln -s /opt/remi/php56/root/usr/sbin/php-fpm /usr/sbin/php-fpm
 
-RUN \
-sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php-fpm.conf && \
-sed -i -e "s/;catch_workers_output\s*=\s*yes/catch_workers_output = yes/g" /etc/php-fpm.d/www.conf && \
-sed -i -e "s/pm.max_children = 5/pm.max_children = 9/g" /etc/php-fpm.d/www.conf && \
-sed -i -e "s/pm.max_children = 5/pm.max_children = 9/g" /etc/php-fpm.d/www.conf && \
-sed -i -e "s/pm.start_servers = 2/pm.start_servers = 3/g" /etc/php-fpm.d/www.conf && \
-sed -i -e "s/pm.min_spare_servers = 1/pm.min_spare_servers = 2/g" /etc/php-fpm.d/www.conf && \
-sed -i -e "s|listen = 127.0.0.1:9000|listen = /var/run/php-fpm.sock|g" /etc/php-fpm.d/www.conf && \
-sed -i -e "s|;listen.owner = nobody|listen.owner = nginx|g" /etc/php-fpm.d/www.conf && \
-sed -i -e "s|;listen.group = nobody|listen.group = nginx|g" /etc/php-fpm.d/www.conf && \
-sed -i -e "s|;listen.mode = 0660|listen.mode = 0750|g" /etc/php-fpm.d/www.conf && \
-sed -i -e "s/pm.max_requests = 500/pm.max_requests = 200/g" /etc/php-fpm.d/www.conf && \
-sed -i -e "s/user = apache/user = nginx/g" /etc/php-fpm.d/www.conf && \
-sed -i -e "s/group = apache/group = nginx/g" /etc/php-fpm.d/www.conf
-
-ADD php.ini /etc/opt/remi/php56/php.ini
-ADD whmcs-configuration.php /tmp/configuration.php
+ADD conf/php-fpm.conf /etc/opt/remi/php56/php-fpm.conf
+ADD conf/php-fpm-www.conf /etc/opt/remi/php56/php-fpm.d/www.conf
+ADD conf/php.ini /etc/opt/remi/php56/php.ini
 
 # nginx site conf
 ADD conf/nginx.conf /etc/nginx/nginx.conf
@@ -64,6 +50,8 @@ ADD scripts/start.sh /start.sh
 RUN chmod 755 /start.sh
 
 # copy in WHMCS archive
+ADD src/ciptex-addons.zip /ciptex.zip
+ADD src/whmcs-xero-2.15.zip /xero.zip
 ADD src/whmcs_v750_full.zip /whmcs.zip
 
 # fix permissions
@@ -74,6 +62,6 @@ VOLUME ["/usr/share/nginx/html"]
 
 # Expose Ports
 #EXPOSE 443
-EXPOSE 80
+EXPOSE 8086
 
 CMD ["/bin/bash", "/start.sh"]
