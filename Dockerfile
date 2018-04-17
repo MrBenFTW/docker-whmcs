@@ -21,7 +21,7 @@ yum-config-manager --enable remi-php56
 
 # Install php-fpm etc as well as wget/unzip
 #RUN amazon-linux-extras install php7.2-fpm
-RUN yum -y install php56-php-fpm php56-php-mysql php56-php-ldap php56-php-cli php56-php-mbstring php56-php-pdo php56-php-pear php56-php-xml php56-php-soap php56-php-gd
+RUN yum -y install php56-php-fpm php56-php-mysql php56-php-ldap php56-php-cli php56-php-mbstring php56-php-pdo php56-php-pear php56-php-xml php56-php-soap php56-php-gd php56-php-xmlrpc php56-php-imap
 
 RUN mkdir -p -m 0777 /var/lib/php/session && chown -R nginx:nginx /var/lib/php/session && chmod 777 /var/lib/php/session
 
@@ -33,7 +33,8 @@ RUN \
 ln -s /etc/opt/remi/php56/php.ini /etc/php.ini && \
 ln -s /etc/opt/remi/php56/php-fpm.conf /etc/php-fpm.conf && \
 ln -s /etc/opt/remi/php56/php-fpm.d /etc/php-fpm.d && \
-ln -s /opt/remi/php56/root/usr/sbin/php-fpm /usr/sbin/php-fpm
+ln -s /opt/remi/php56/root/usr/sbin/php-fpm /usr/sbin/php-fpm 
+#&& \ rm -rf /opt/remi/php56/root/etc/php.d/*.ini
 
 ADD conf/php-fpm.conf /etc/opt/remi/php56/php-fpm.conf
 ADD conf/php-fpm-www.conf /etc/opt/remi/php56/php-fpm.d/www.conf
