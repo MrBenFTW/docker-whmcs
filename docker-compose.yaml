@@ -1,0 +1,12 @@
+version: '3.2'
+
+services:
+  docker-whmcs_7:
+    build: ./docker-whmcs_7
+    volumes:
+    - type: bind
+      source: /usr/share/nginx
+      target: /usr/share/nginx
+    ports:
+    - "80:80"
+    - "443:443"
