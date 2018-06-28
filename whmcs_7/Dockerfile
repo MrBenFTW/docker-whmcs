@@ -42,8 +42,7 @@ ADD conf/php.ini /etc/opt/remi/php56/php.ini
 
 # nginx site conf
 ADD conf/nginx.conf /etc/nginx/nginx.conf
-RUN rm -Rf /etc/nginx/conf.d/* && \
-mkdir -p /etc/nginx/ssl/
+RUN rm -Rf /etc/nginx/conf.d/* && mkdir -p /etc/nginx/ssl/
 ADD conf/nginx-site.conf /etc/nginx/conf.d/default.conf
 
 # Start Supervisord
@@ -51,7 +50,6 @@ ADD scripts/start.sh /start.sh
 RUN chmod 755 /start.sh
 
 # copy in WHMCS archive
-ADD src/ciptex-addons.zip /ciptex.zip
 ADD src/whmcs-xero-2.15.zip /xero.zip
 ADD src/whmcs_v750_full.zip /whmcs.zip
 
