@@ -24,11 +24,11 @@ if [ ! -e /.first-run-complete ]; then
   PHPVERSION=$(php-fpm --version | grep '^PHP' | sed 's/PHP \([0-9]\.[0-9]*\).*$/\1/')
   #extract whmcs into place
   rm -f /usr/share/nginx/html/*.html
-  unzip /whmcs.zip -q -d  /usr/share/nginx/html && mv /usr/share/nginx/html/whmcs /usr/share/nginx/html/members
+  unzip -q /whmcs.zip -d  /usr/share/nginx/html && mv /usr/share/nginx/html/whmcs /usr/share/nginx/html/members
   rm -f /whmcs.zip
 
   #extract xero-addon into place
-  unzip /xero.zip -q -d  /usr/share/nginx/html/members
+  unzip -q /xero.zip -d  /usr/share/nginx/html/members
   rm -f /xero.zip
 
   #Remove install
