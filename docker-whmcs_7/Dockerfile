@@ -62,5 +62,6 @@ VOLUME ["/usr/share/nginx/html"]
 # Expose Ports
 #EXPOSE 443
 EXPOSE 8086
+EXPOSE 8087
 
 CMD ["/bin/bash", "/start.sh"]

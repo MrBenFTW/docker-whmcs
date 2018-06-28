@@ -35,6 +35,7 @@ if [ ! -e /.first-run-complete ]; then
   rm -rf /usr/share/nginx/html/members/install directory
 
   #sort permissions on configuration.php file
+  touch /usr/share/nginx/html/members/configuration.php
   chown nginx:nginx /usr/share/nginx/html/members/configuration.php && chmod 0777 /usr/share/nginx/html/members/configuration.php
 
   echo "Do not remove this file." > /.first-run-complete

@@ -8,5 +8,5 @@ services:
       source: /usr/share/nginx
       target: /usr/share/nginx
     ports:
-    - "80:80"
-    - "443:443"
+    - "8086:8086"
+    - "8087:8087"
