@@ -2,7 +2,7 @@ version: '3.2'
 
 services:
   whmcs_7:
-    build: ./docker-whmcs_7
+    build: ./whmcs_7
     volumes:
     - type: bind
       source: /usr/share/nginx
