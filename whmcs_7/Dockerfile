@@ -51,7 +51,7 @@ RUN chmod 755 /start.sh
 
 # copy in WHMCS archive
 ADD src/whmcs-xero-2.15.zip /xero.zip
-ADD src/whmcs_v750_full.zip /whmcs.zip
+ADD src/whmcs_v751_full.zip /whmcs.zip
 
 # fix permissions
 RUN chown -Rf nginx.nginx /usr/share/nginx/html/
