@@ -32,7 +32,7 @@ if [ ! -e /.first-run-complete ]; then
   rm -f /xero.zip
 
   #Remove install
-  rm -rf /usr/share/nginx/html/members/install directory
+  #rm -rf /usr/share/nginx/html/members/install directory
 
   #sort permissions on configuration.php file
   touch /usr/share/nginx/html/members/configuration.php
