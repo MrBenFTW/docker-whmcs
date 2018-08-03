@@ -1,12 +1,20 @@
 version: '3.2'
 
 services:
-  whmcs_7:
+  whmcs:
     build: ./whmcs_7
     volumes:
-    - type: bind
-      source: /usr/share/nginx
-      target: /usr/share/nginx
+      - "/some/dir/whmcs/web:/usr/local/share/nginx"
     ports:
-    - "8086:8086"
-    - "8087:8087"
+    - "80:8086"
+
+  db:
+    image: mariadb
+    restart: always
+    volumes:
+      - "/some/dir/whmcs/db:/var/lib/mysql"
+    environment:
+      MYSQL_DATABASE: whmcs
+      MYSQL_USER: whmcs
+      MYSQL_PASSWORD: SOMEDBPASSWORD
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
