@@ -31,6 +31,10 @@ Run the container with minimal configuration and options:
 
 This will run the container, and you can then run the WHMCS installer by browsing to http://docker-host:8080
 
+After the installation, it will ask you to delete the INSTALL folder, simply restart the container and it will delete it itself.
+
+If you use the docker-compose supplied, when asked for the database host, its just: db
+
 ### Other options
 
 #### Linking volumes
