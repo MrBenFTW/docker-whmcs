@@ -4,7 +4,7 @@ services:
   whmcs:
     build: ./whmcs_7
     volumes:
-      - "/some/dir/whmcs/web:/usr/local/share/nginx"
+      - "/some/dir/whmcs/web:/usr/share/nginx"
     ports:
     - "80:8086"
 
