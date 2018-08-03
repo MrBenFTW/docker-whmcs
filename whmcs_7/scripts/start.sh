@@ -16,12 +16,12 @@ fi
 procs=$(cat /proc/cpuinfo |grep processor | wc -l)
 sed -i -e "s/worker_processes 5/worker_processes $procs/" /etc/nginx/nginx.conf
 
-# Install the correct ionCube loader and WHMCS
+cp /tmp/ioncube/ioncube_loader_lin_5.6.so /opt/remi/php56/root/usr/lib64/php/modules
+chmod 755 /opt/remi/php56/root/usr/lib64/php/modules/ioncube_loader_lin_5.6.so
+
+# Install WHMCS
 if [ ! -e /usr/share/nginx/html/.first-run-complete ]; then
   
-  cp /tmp/ioncube/ioncube_loader_lin_5.6.so /opt/remi/php56/root/usr/lib64/php/modules
-  chmod 755 /opt/remi/php56/root/usr/lib64/php/modules/ioncube_loader_lin_5.6.so
-
   #extract whmcs into place
   rm -f /usr/share/nginx/html/*.html
   #unzip -q /whmcs.zip -d  /usr/share/nginx/html && mv /usr/share/nginx/html/whmcs /usr/share/nginx/html/
