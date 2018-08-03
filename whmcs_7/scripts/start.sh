@@ -17,7 +17,7 @@ procs=$(cat /proc/cpuinfo |grep processor | wc -l)
 sed -i -e "s/worker_processes 5/worker_processes $procs/" /etc/nginx/nginx.conf
 
 # Install the correct ionCube loader and WHMCS
-if [ ! -e /.first-run-complete ]; then
+if [ ! -e /usr/share/nginx/html/.first-run-complete ]; then
   
   cp /tmp/ioncube/ioncube_loader_lin_5.6.so /opt/remi/php56/root/usr/lib64/php/modules
   chmod 755 /opt/remi/php56/root/usr/lib64/php/modules/ioncube_loader_lin_5.6.so
@@ -33,7 +33,7 @@ if [ ! -e /.first-run-complete ]; then
   unzip -q /xero.zip -d  /usr/share/nginx/html/
   rm -f /xero.zip
 
-  echo "Do not remove this file." > /.first-run-complete
+  echo "Do not remove this file." > /usr/share/nginx/html/.first-run-complete
 fi
 
 if [ -s /usr/share/nginx/html/configuration.php ]
